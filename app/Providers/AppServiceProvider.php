@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace App\Providers;
 
+use App\Models\User;
 use App\Providers\Filament\FilamentComponents;
 use Filament\Support\Facades\FilamentView;
 use Illuminate\Database\Eloquent\Model;
@@ -35,7 +36,11 @@ final class AppServiceProvider extends ServiceProvider
         Model::shouldBeStrict();
         Model::unguard();
 
-        LogViewer::auth(fn(Request $request): bool => $request->user()->is_developer);
+        LogViewer::auth(
+            fn(Request $request): bool => User::query()->where('email', $request->user()?->email)
+                ->where('is_active', true)
+                ->exists()
+        );
 
         FilamentComponents::configure();
     }

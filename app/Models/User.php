@@ -6,15 +6,30 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use Carbon\CarbonInterface;
+use Database\Factories\UserFactory;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+/**
+ * @property-read int                  $id
+ * @property-read string               $name
+ * @property-read string               $email
+ * @property-read CarbonInterface|null $email_verified_at
+ * @property-read string               $password
+ * @property-read string|null          $remember_token
+ * @property-read bool                 $is_active
+ * @property-read CarbonInterface      $created_at
+ * @property-read CarbonInterface      $updated_at
+ */
 final class User extends Authenticatable implements FilamentUser
 {
+    /** @use HasFactory<UserFactory> */
     use HasFactory;
+
     use Notifiable;
 
     /**
@@ -53,6 +68,7 @@ final class User extends Authenticatable implements FilamentUser
         return [
             'email_verified_at' => 'datetime',
             'password'          => 'hashed',
+            'is_active'         => 'boolean',
         ];
     }
 }

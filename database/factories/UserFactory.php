@@ -17,7 +17,7 @@ final class UserFactory extends Factory
     /**
      * The current password being used by the factory.
      */
-    private static ?string $password;
+    private static ?string $password = null;
 
     /**
      * Define the model's default state.
@@ -38,7 +38,7 @@ final class UserFactory extends Factory
     /**
      * Indicate that the model's email address should be unverified.
      */
-    public function unverified(): static
+    public function unverified(): self
     {
         return $this->state(fn(array $attributes): array => [
             'email_verified_at' => null,
