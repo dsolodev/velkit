@@ -1,59 +1,117 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Velkit
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+<p>
+    <a href="https://github.com/dsolodev/velkit/actions"><img src="https://github.com/dsolodev/velkit/actions/workflows/tests.yml/badge.svg" alt="Build Status"></a>
+    <a href="https://packagist.org/packages/dsolodev/velkit"><img src="https://img.shields.io/packagist/dt/dsolodev/velkit" alt="Total Downloads"></a>
+    <a href="https://packagist.org/packages/dsolodev/velkit"><img src="https://img.shields.io/packagist/v/dsolodev/velkit" alt="Latest Stable Version"></a>
+    <a href="https://packagist.org/packages/dsolodev/velkit"><img src="https://img.shields.io/packagist/l/dsolodev/velkit" alt="License"></a>
 </p>
 
-## About Laravel
+**Velkit** is an opinionated starter kit for [Laravel](https://laravel.com) with [Filament](https://filamentphp.com/).
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## ✨ Features
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- ✅ **Filament 4.1** admin panel pre-configured
+- ✅ **Log Viewer** (opcodesio/log-viewer)
+- ✅ **Rector**, **Pint**, **Prettier** for automated code quality
+- ✅ **PHPStan Level Max** (maximum strictness)
+- ✅ **100% Type Coverage** with Pest
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 📋 Prerequisites
 
-## Learning Laravel
+Before installing Velkit, ensure you have:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+- **[PHP 8.4+](https://php.net/releases/)**
+- **[Laravel Installer](https://laravel.com/docs/installation#creating-a-laravel-project)** (recommended)
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Installing Laravel Installer
 
-## Laravel Sponsors
+If you haven't installed the Laravel Installer yet:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+```bash
+composer global require laravel/installer
+```
 
-### Premium Partners
+Make sure Composer's global bin directory is in your PATH.
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+## 🚀 Installation
 
-## Contributing
+### Quick Start with Laravel Installer
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+You can use the [Laravel Installer](https://laravel.com/docs#installing-php) to install this starter kit.
 
-## Code of Conduct
+```bash
+laravel new my-app --using=dsolodev/velkit
+cd my-app
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Alternative: Using Composer
 
-## Security Vulnerabilities
+```bash
+composer create-project dsolodev/velkit --prefer-dist example-app
+cd my-app
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+---
 
-## License
+## 🛠️ Development Tools
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Available Commands
+
+```bash
+# Development
+composer dev                    # Start development server with hot reloading, queue worker, and log monitoring
+
+# Code quality
+composer lint                   # Auto-fix code style issues and refactoring with Pint, Rector, Prettier
+composer test:lint              # Check code style issue and refactoring (dry-run) for CI/CD pipeline
+
+# Testing
+composer test:type-coverage     # Check type coverage using Pest
+composer test:types             # Run PHPStan analysis at max level
+composer test                   # Run full test suite
+
+# Maintenance
+composer update:requirements    # Update all PHP and NPM dependencies to the latest versions
+```
+
+### Pre-configured Tools
+
+- **[Pint](https://laravel.com/docs/pint)** - Code style fixer (PSR-12 + Laravel)
+- **[Rector](https://getrector.com/)** - Automated refactoring
+- **[Pest](https://pestphp.com/)** - Testing framework
+- **[Prettier](https://prettier.io/)** - JS/CSS formatter
+- **[Larastan](https://github.com/larastan/larastan)** - PHPStan for Laravel
+- **[Laravel Boost](https://laravel.com/docs/boost)** - Laravel AI Agent Starter Kit
+
+## 📖 Resources
+
+### Official Documentation
+
+- [Laravel Documentation](https://laravel.com/docs)
+- [Filament Documentation](https://filamentphp.com/docs)
+- [PHPStan Documentation](https://phpstan.org/user-guide/getting-started)
+- [Rector Documentation](https://getrector.com/documentation)
+- [Pest Documentation](https://pestphp.com/docs)
+
+### Packages Used
+
+- **[laravel/framework](https://github.com/laravel/framework)** - The Laravel Framework
+- **[filament/filament](https://github.com/filamentphp/filament)** - Admin panel
+- **[opcodesio/log-viewer](https://github.com/opcodesio/log-viewer)** - Log viewer
+- **[larastan/larastan](https://github.com/larastan/larastan)** - PHPStan for Laravel
+- **[pestphp/pest](https://github.com/pestphp/pest)** - Testing framework
+- **[driftingly/rector-laravel](https://github.com/driftingly/rector-laravel)** - Automated refactoring for Laravel
+- **[laravel/boost](https://laravel.com/docs/boost)** - Dependency management (dev)
+
+## 📝 License
+
+Velkit is open-sourced software licensed under the [MIT license](LICENSE).
+
+## 👤 Author
+
+**Created by:** dsolodev  
+**GitHub:** [@dsolodev](https://github.com/dsolodev)  
+**Repository:** [dsolodev/velkit](https://github.com/dsolodev/velkit)
+
+---

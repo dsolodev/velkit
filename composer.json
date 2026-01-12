@@ -1,28 +1,36 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "laravel/laravel",
+    "name": "dsolodev/velkit",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
+    "description": "Personal and opinionated Laravel framework starter kit with Filament.",
     "keywords": [
         "laravel",
-        "framework"
+        "framework",
+        "filament",
+        "starter-kit"
     ],
     "license": "MIT",
     "require": {
-        "php": "^8.2",
-        "laravel/framework": "^12.0",
-        "laravel/tinker": "^2.10.1"
+        "php": "^8.5",
+        "filament/filament": "^4.5.2",
+        "laravel/framework": "^12.46",
+        "laravel/tinker": "^2.11.0",
+        "opcodesio/log-viewer": ">=3.21.1"
     },
     "require-dev": {
-        "fakerphp/faker": "^1.23",
-        "laravel/boost": "^1.8",
-        "laravel/pail": "^1.2.2",
-        "laravel/pint": "^1.24",
-        "laravel/sail": "^1.41",
-        "mockery/mockery": "^1.6",
-        "nunomaduro/collision": "^8.6",
-        "pestphp/pest": "^4.3",
-        "pestphp/pest-plugin-laravel": "^4.0"
+        "driftingly/rector-laravel": ">=2.1.9",
+        "fakerphp/faker": "^1.24.1",
+        "larastan/larastan": ">=3.8.1",
+        "laravel/boost": "^1.8.9",
+        "laravel/pail": "^1.2.4",
+        "laravel/pint": "^1.27",
+        "laravel/sail": "^1.52",
+        "mockery/mockery": "^1.6.12",
+        "nunomaduro/collision": "^8.8.3",
+        "pestphp/pest": "^4.3.1",
+        "pestphp/pest-plugin-laravel": "^4.0",
+        "pestphp/pest-plugin-type-coverage": "^4.0.3",
+        "rector/rector": ">=2.3"
     },
     "autoload": {
         "psr-4": {
@@ -42,6 +50,7 @@
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
             "@php artisan key:generate",
             "@php artisan migrate --force",
+            "@php artisan log-viewer:publish",
             "npm install",
             "npm run build"
         ],
@@ -49,17 +58,17 @@
             "Composer\\Config::disableProcessTimeout",
             "npx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1\" \"php artisan pail --timeout=0\" \"npm run dev\" --names=server,queue,logs,vite --kill-others"
         ],
-        "test": [
-            "@php artisan config:clear --ansi",
-            "@php artisan test"
-        ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover --ansi"
+            "@php artisan package:discover --ansi",
+            "@php artisan filament:upgrade",
+            "@php artisan log-viewer:publish"
         ],
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --ansi --force",
-            "@php artisan boost:update --ansi"
+            "@php artisan log-viewer:publish",
+            "@php artisan boost:update --ansi",
+            "@update:requirements"
         ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
@@ -71,6 +80,27 @@
         ],
         "pre-package-uninstall": [
             "Illuminate\\Foundation\\ComposerScripts::prePackageUninstall"
+        ],
+        "update:requirements": [
+            "composer bump",
+            "npx npm-check-updates -u"
+        ],
+        "lint": [
+            "rector",
+            "pint --parallel",
+            "npm run lint"
+        ],
+        "test:type-coverage": "pest --type-coverage --min=100",
+        "test:lint": [
+            "pint --parallel --test",
+            "rector --dry-run",
+            "npm run test:lint"
+        ],
+        "test:types": "phpstan",
+        "test": [
+            "@test:type-coverage",
+            "@test:lint",
+            "@test:types"
         ]
     },
     "extra": {
