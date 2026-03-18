@@ -8,9 +8,10 @@ namespace App\Models;
 use Carbon\CarbonInterface;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Override;
 
 /**
  * @property-read int                  $id
@@ -23,32 +24,11 @@ use Override;
  * @property-read CarbonInterface      $created_at
  * @property-read CarbonInterface      $updated_at
  */
+#[Fillable(['name', 'email', 'password'])]
+#[Hidden(['password', 'remember_token'])]
 final class User extends Authenticatable implements FilamentUser
 {
     use Notifiable;
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
-    #[Override]
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
-
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
-     */
-    #[Override]
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
 
     public function canAccessPanel(Panel $panel): bool
     {
