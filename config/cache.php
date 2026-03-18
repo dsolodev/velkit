@@ -105,6 +105,20 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Cache Serializable Classes
+    |--------------------------------------------------------------------------
+    |
+    | This option controls which PHP classes are allowed to be unserialized
+    | from the cache. Setting this to false disables PHP object unserialization
+    | entirely. Explicitly list any classes your application stores as objects
+    | in the cache to prevent deserialization gadget chain attacks.
+    |
+    */
+
+    'serializable_classes' => false,
+
+    /*
+    |--------------------------------------------------------------------------
     | Cache Key Prefix
     |--------------------------------------------------------------------------
     |
