@@ -11,7 +11,7 @@
 
 ## ✨ Features
 
-- ✅ **Filament 4.1** admin panel pre-configured
+- ✅ **Filament 5** admin panel pre-configured
 - ✅ **Log Viewer** (opcodesio/log-viewer)
 - ✅ **Rector**, **Pint**, **Prettier** for automated code quality
 - ✅ **PHPStan Level Max** (maximum strictness)
